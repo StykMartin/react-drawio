@@ -39,6 +39,10 @@ export const DrawIoEmbed = forwardRef<DrawIoEmbedRef, DrawIoEmbedProps>(
     const [isInitialized, setIsInitialized] = useState(false);
 
     const messageHandler = (evt: MessageEvent) => {
+      if (evt.source !== iframeRef.current?.contentWindow) {
+        return;
+      }
+
       handleEvent(
         evt,
         {
